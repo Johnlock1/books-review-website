@@ -17,7 +17,11 @@ where <isbn> is an ISBN number, the website returns a JSON response.
 
 ## Known Issues
 
-Passwords are saved as text. I tried to hash the passwords by importing `from passlib.apps import custom_app_context` and using `hash` method, but I couldn't get it to work.
+**Passwords are saved as plain text.**
+I tried to hash the passwords by importing `from passlib.apps import custom_app_context` and using `hash` method, but I couldn't get it to work.
+
+## Live site
+You can check the site at https://johnlock1-cs50-project1.herokuapp.com
 
 ## Author
 

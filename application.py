@@ -18,7 +18,6 @@ app = Flask(__name__)
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.debug = True
 Session(app)
 
 # Set up database
@@ -246,3 +245,8 @@ def api(isbn):
     # If the requested ISBN number isn’t in the database, return 404 error
     except:
         abort(404)
+
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
