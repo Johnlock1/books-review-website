@@ -1,0 +1,8 @@
+.checked {
+    color: orange;
+}
+
+.bd-example {
+  border: solid #f8f9fa;
+  border-width: .2rem;
+}

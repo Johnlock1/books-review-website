@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+      <h4>Book details</h4>
+  </div>
+  <div class="container">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="col">ISBN</td>
+                <td scope="row"> {{ book.isbn }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Title</td>
+                <td scope="two"> {{ book.title }}</td>
+            </tr>
+            <tr>
+              <th scope="col">Author</td>
+              <td scope="row"> {{ book.name }}</td>
+            </tr>
+            <tr>
+              <th scope="col">Year</td>
+              <td scope="row"> {{ book.year }}</td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+    <div class="container">
+      <h4>Reviews</h4>
+    </div>
+    <div class="container">
+      <table class="table">
+        <tbody>
+            <tr>
+              <th scope="col">Average Rating</td>
+              <td scope="row">{{ json["avg_rating"] }}</td>
+            </tr>
+            <tr>
+              <th scope="col">Ratings Count</td>
+              <td scope="row">{{ json["reviews_count"] }}</td>
+            </tr>
+            <tr>
+              <th scope="col"><a href=https://www.goodreads.com/>Goodreads</a> Average Rating</td>
+              <td scope="row">{{ json["average_rating"] }}</td>
+            </tr>
+            <tr>
+              <th scope="col"><a href=https://www.goodreads.com/>Goodreads</a> Ratings Count</td>
+              <td scope="row">{{ "{:,}".format(json["work_ratings_count"]) }}</td>
+            </tr>
+      </tbody>
+    </table>
+  </div>
+  {% if myreview == None %}
+    <div class="container">
+      <h6>Submit your review</h6>
+    </div>
+    <div class="container">
+      <form action="{{ url_for('review', book_id=book[0]) }}" method="post">
+        <fieldset>
+            <div class="form-group">
+              <select class="form-control" name="rating">
+                <option value="1">1 Star</option>
+                <option value="2">2 star</option>
+                <option value="3">3 star</option>
+                <option value="4">4 star</option>
+                <option value="5">5 star</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <!-- <label for="exampleFormControlTextarea1">What do you think about the book?</label> -->
+              <textarea class="form-control" name="review" rows="3" placeholder="What did you think?"></textarea>
+            </div>
+            <div class="form-group col-md-3">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </fieldset>
+      </form>
+    </div>
+  {% else %}
+    <div class="container">
+      <h5>Your review</h5>
+    </div>
+    <div class="container">
+      <p>
+        Rating: {{ myreview.rating }} star.
+      </p>
+      {% if myreview.review != "" %}
+        <p>
+          Review: {{ myreview.review }}
+        </p>
+    {% endif %}
+    </div>
+  {% endif %}
+  <div class="container">
+    <h5>Community Reviews</h5>
+    {% if reviews != None %}
+      {% for review in reviews %}
+        <div class="bd-example">
+          <p>
+            Rating: {{ review.rating }} star.
+          </p>
+          {% if review.review != "" %}
+            <p>
+              Review: {{ review.review }}
+            </p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>
+        No available reviews.
+      </p>
+    {% endif %}
+  </div>
+
+
+{% endblock %}

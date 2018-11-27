@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <h1 class="bd-lead">
+      Welcome to the Book Reviews!
+    </h1>
+    <p>
+      Here, you can search for books, read community reviews and leave your own reviews!
+    </p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <form class="form-horizontal" action="{{ url_for('search') }}" method="post" role="form">
+          <div class="form-group">
+            <div class="col-lg-12">
+              <div class="content row">
+                <div class="col-lg-10 mb-2">
+                  <input class="form-control" name="search" placeholder="Search by Book Title, Author or ISBN" type="text"/>
+                </div>
+                <div class="col-lg-2 mb-2">
+                  <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
