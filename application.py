@@ -11,17 +11,20 @@ from helpers import *
 
 app = Flask(__name__)
 
-# Check for environment variable
-if not os.getenv("DATABASE_URL"):
-    raise RuntimeError("DATABASE_URL is not set")
+# # Check for environment variable
+# if not os.getenv("DATABASE_URL"):
+#     raise RuntimeError("DATABASE_URL is not set")
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+app.debug = True
 Session(app)
 
 # Set up database
-engine = create_engine(os.getenv("DATABASE_URL"))
+# engine = create_engine(os.getenv("DATABASE_URL"))
+engine = create_engine(credentials.DATABASE_URL)
+
 db = scoped_session(sessionmaker(bind=engine))
 
 
