@@ -132,8 +132,9 @@ def search():
 
     books = db.execute("SELECT * FROM books \
         JOIN authors ON books.author_id=authors.id \
-        WHERE (isbn LIKE :input) OR (title LIKE :input) OR (name LIKE :input)",
-                       {"input": f"%{input}%"}).fetchall()
+        WHERE (LOWER(isbn) LIKE :input) OR (LOWER(title) LIKE :input) \
+        OR (LOWER(name) LIKE :input)",
+                       {"input": f"%{input.lower()}%"}).fetchall()
 
     # If no books in database, I display a message instead of a table
     if len(books) == 0:
